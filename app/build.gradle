@@ -26,14 +26,17 @@ android {
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-  /* Kotlin */
+  // Kotlin
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-  /* AndroidX */
+  // Support Libraries
   implementation "androidx.appcompat:appcompat:$appcompat_version"
+  implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
   implementation "androidx.core:core-ktx:$core_ktx_version"
 
-  /* Test */
+  // TUTORIAL DEPENDENCIES HERE
+
+  // Testing Dependencies
   testImplementation "junit:junit:$junit_version"
   androidTestImplementation "androidx.test:runner:$runner_version"
   androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"

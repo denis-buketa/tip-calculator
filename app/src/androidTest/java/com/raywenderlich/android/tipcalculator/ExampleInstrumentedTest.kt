@@ -1,4 +1,4 @@
-package android.raywenderlich.com.tipcalculator
+package com.raywenderlich.android.tipcalculator
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
   fun useAppContext() {
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getTargetContext()
-    assertEquals("android.raywenderlich.com.tipcalculator", appContext.packageName)
+    assertEquals("com.raywenderlich.android.tipcalculator", appContext.packageName)
   }
 }

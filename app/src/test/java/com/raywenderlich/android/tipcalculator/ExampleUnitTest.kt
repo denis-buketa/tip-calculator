@@ -1,4 +1,4 @@
-package android.raywenderlich.com.tipcalculator
+package com.raywenderlich.android.tipcalculator
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
