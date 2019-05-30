@@ -34,7 +34,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 /**
- * Main Screen
+ * Main Screen contains input fields for the User shows the result once it is ready.
  */
 class MainActivity : AppCompatActivity() {
 

@@ -46,10 +46,10 @@
       android:layout_height="wrap_content"
       android:layout_marginEnd="@dimen/section_horizontal_margin"
       android:layout_marginStart="@dimen/section_horizontal_margin"
-      android:layout_marginTop="@dimen/section_top_margin"
       android:text="@string/section_bill_amount"
+      app:layout_constraintBottom_toBottomOf="@+id/billEditText"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+      app:layout_constraintTop_toTopOf="@+id/billEditText"/>
 
   <TextView
       android:id="@+id/tipTextView"
@@ -57,10 +57,10 @@
       android:layout_height="wrap_content"
       android:layout_marginEnd="@dimen/section_horizontal_margin"
       android:layout_marginStart="@dimen/section_horizontal_margin"
-      android:layout_marginTop="@dimen/section_top_margin"
       android:text="@string/section_tip_percent"
+      app:layout_constraintBottom_toBottomOf="@+id/tipEditText"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/billTextView"/>
+      app:layout_constraintTop_toTopOf="@+id/tipEditText"/>
 
   <TextView
       android:id="@+id/partyTextView"
@@ -68,11 +68,112 @@
       android:layout_height="wrap_content"
       android:layout_marginEnd="@dimen/section_horizontal_margin"
       android:layout_marginStart="@dimen/section_horizontal_margin"
-      android:layout_marginTop="@dimen/section_top_margin"
       android:text="@string/section_people_party"
+      app:layout_constraintBottom_toBottomOf="@+id/partyEditText"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/tipTextView"/>
+      app:layout_constraintTop_toTopOf="@+id/partyEditText"/>
 
   <!-- User Input EditTexts -->
+
+  <EditText
+      android:id="@+id/billEditText"
+      android:layout_width="@dimen/input_field_width"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/section_horizontal_margin"
+      android:layout_marginTop="@dimen/input_field_top_margin"
+      android:hint="@string/hint_input_bill_amount"
+      android:inputType="numberDecimal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="60.00$"/>
+
+  <EditText
+      android:id="@+id/tipEditText"
+      android:layout_width="@dimen/input_field_width"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/section_horizontal_margin"
+      android:layout_marginTop="@dimen/input_field_top_margin"
+      android:hint="@string/hint_input_tip_amount"
+      android:inputType="numberDecimal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/billEditText"
+      tools:text="20.00%"/>
+
+  <EditText
+      android:id="@+id/partyEditText"
+      android:layout_width="@dimen/input_field_width"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/section_horizontal_margin"
+      android:layout_marginTop="@dimen/input_field_top_margin"
+      android:hint="@string/hint_input_party_amount"
+      android:inputType="numberSigned"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tipEditText"
+      tools:text="4"/>
+
+  <!-- Results Sections -->
+
+  <TextView
+      android:id="@+id/resultsTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/section_horizontal_margin"
+      android:layout_marginStart="@dimen/section_horizontal_margin"
+      android:layout_marginTop="@dimen/result_top_margin"
+      android:text="@string/result_label"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/partyEditText"/>
+
+  <TextView
+      android:id="@+id/totalTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/section_horizontal_margin"
+      android:layout_marginStart="@dimen/section_horizontal_margin"
+      android:layout_marginTop="@dimen/result_section_top_margin"
+      android:text="@string/result_section_total"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/resultsTextView"/>
+
+  <TextView
+      android:id="@+id/perPersonTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/section_horizontal_margin"
+      android:layout_marginStart="@dimen/section_horizontal_margin"
+      android:layout_marginTop="@dimen/result_section_top_margin"
+      android:text="@string/result_section_per_person"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/totalTextView"/>
+
+  <!-- Results Values -->
+
+  <TextView
+      android:id="@+id/totalValueTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/section_horizontal_margin"
+      android:layout_marginStart="@dimen/section_horizontal_margin"
+      android:layout_marginTop="@dimen/result_section_top_margin"
+      android:text="-"
+      android:textColor="@color/colorBlack"
+      app:layout_constraintBottom_toBottomOf="@+id/totalTextView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/totalTextView"
+      tools:text="72.00$"/>
+
+  <TextView
+      android:id="@+id/perPersonValueTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/section_horizontal_margin"
+      android:layout_marginStart="@dimen/section_horizontal_margin"
+      android:layout_marginTop="@dimen/result_section_top_margin"
+      android:text="-"
+      android:textColor="@color/colorBlack"
+      app:layout_constraintBottom_toBottomOf="@+id/perPersonTextView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/perPersonTextView"
+      tools:text="18.00$"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

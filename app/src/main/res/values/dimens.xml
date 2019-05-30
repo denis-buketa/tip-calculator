@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <dimen name="section_top_margin">12dp</dimen>
   <dimen name="section_horizontal_margin">12dp</dimen>
+
+  <dimen name="input_field_width">96dp</dimen>
+  <dimen name="input_field_top_margin">8dp</dimen>
+
+  <dimen name="result_top_margin">16dp</dimen>
+  <dimen name="result_section_top_margin">8dp</dimen>
 
 </resources>
