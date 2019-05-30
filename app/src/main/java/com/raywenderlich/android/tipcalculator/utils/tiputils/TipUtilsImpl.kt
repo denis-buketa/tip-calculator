@@ -29,34 +29,26 @@
  */
 package com.raywenderlich.android.tipcalculator.utils.tiputils
 
+import com.raywenderlich.android.tipcalculator.utils.numberutils.NumberUtils
+
 /**
- * Used to perform specific calculations on the User's input for the Tip value.
+ * Creates readable value of the tip for the User.
  */
-class TipUtilsImpl : TipUtils {
+class TipUtilsImpl(private val numberUtils: NumberUtils) : TipUtils {
 
   companion object {
-    const val READABLE_FORMAT = "%.2f%%"
+    private const val READABLE_FORMAT = "%.2f%%"
   }
-
-  /**
-   * Round up the number to 2 decimal places.
-   *
-   * Examples:
-   * - 10.123 --> 10.12
-   * - 10.125 --> 10.13
-   * - 10.127 --> 10.13
-   */
-  override fun roundUpToTwoDecimalPlaces(tipPercent: Float): Float =
-      Math.round(tipPercent * 100) / 100.0f
 
   /**
    * Map the number to readable Tip format.
    *
    * Examples:
+   * - 10     --> "10.00%"
    * - 10.123 --> "10.12%"
    * - 10.125 --> "10.13%"
    * - 10.127 --> "10.13%"
    */
-  override fun mapToReadableFormat(tipPercent: Float): String =
-      String.format(READABLE_FORMAT, roundUpToTwoDecimalPlaces(tipPercent))
+  override fun mapToReadableFormat(tipValue: Float): String =
+      String.format(READABLE_FORMAT, numberUtils.roundUpToTwoDecimalPlaces(tipValue))
 }

@@ -27,9 +27,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.tiputils
+package com.raywenderlich.android.tipcalculator.utils.billutils
 
-interface TipUtils {
+import com.raywenderlich.android.tipcalculator.utils.numberutils.NumberUtils
 
-  fun mapToReadableFormat(tipValue: Float): String
+/**
+ * Creates readable value of the bill for the User.
+ */
+class BillUtilsImpl(private val numberUtils: NumberUtils) : BillUtils {
+
+  companion object {
+    private const val READABLE_FORMAT = "%.2f$"
+  }
+
+  /**
+   * Map the number to readable Tip format.
+   *
+   * Examples:
+   * - 10     --> "10.00$"
+   * - 10.123 --> "10.12$"
+   * - 10.125 --> "10.13$"
+   * - 10.127 --> "10.13$"
+   */
+  override fun mapToReadableFormat(billValue: Float): String =
+      String.format(READABLE_FORMAT, numberUtils.roundUpToTwoDecimalPlaces(billValue))
+
 }
