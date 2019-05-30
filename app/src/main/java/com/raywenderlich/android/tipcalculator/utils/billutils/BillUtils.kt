@@ -27,9 +27,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.tiputils
+package com.raywenderlich.android.tipcalculator.utils.billutils
 
-interface TipUtils {
+interface BillUtils {
 
-  fun mapToReadableFormat(tipValue: Float): String
+  fun mapToReadableFormat(billValue: Float): String
 }
