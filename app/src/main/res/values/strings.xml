@@ -1,3 +1,17 @@
 <resources>
+
   <string name="app_name">Tip Calculator</string>
+
+  <string name="section_bill_amount">Bill Amount $</string>
+  <string name="section_tip_percent">Tip %</string>
+  <string name="section_people_party">People in Party</string>
+
+  <string name="hint_input_bill_amount">60.00$</string>
+  <string name="hint_input_tip_amount">20.00%</string>
+  <string name="hint_input_party_amount">4</string>
+
+  <string name="result_label">Result:</string>
+  <string name="result_section_total">Total:</string>
+  <string name="result_section_per_person">Per Person:</string>
+
 </resources>
