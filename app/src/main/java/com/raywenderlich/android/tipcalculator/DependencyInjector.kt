@@ -30,14 +30,14 @@
 package com.raywenderlich.android.tipcalculator
 
 import com.raywenderlich.android.tipcalculator.utils.ReadableFormatFormatter
-import com.raywenderlich.android.tipcalculator.utils.bill.CurrencyFormatInputFilter
-import com.raywenderlich.android.tipcalculator.utils.bill.CurrencyReadableFormatFormatter
+import com.raywenderlich.android.tipcalculator.utils.currencyutils.CurrencyFormatInputFilter
+import com.raywenderlich.android.tipcalculator.utils.currencyutils.CurrencyReadableFormatFormatter
 import com.raywenderlich.android.tipcalculator.utils.numberutils.NumberUtils
 import com.raywenderlich.android.tipcalculator.utils.numberutils.NumberUtilsImpl
 import com.raywenderlich.android.tipcalculator.utils.stringutils.StringUtils
 import com.raywenderlich.android.tipcalculator.utils.stringutils.StringUtilsImpl
-import com.raywenderlich.android.tipcalculator.utils.tip.TipFormatInputFilter
-import com.raywenderlich.android.tipcalculator.utils.tip.TipReadableFormatFormatter
+import com.raywenderlich.android.tipcalculator.utils.tiputils.TipFormatInputFilter
+import com.raywenderlich.android.tipcalculator.utils.tiputils.TipReadableFormatFormatter
 
 /**
  * Used for creating and providing the dependencies.

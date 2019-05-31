@@ -27,46 +27,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.tip
+package com.raywenderlich.android.tipcalculator.utils.tiputils
 
-import android.text.InputFilter
-import android.text.Spanned
-import java.util.regex.Pattern
+import com.raywenderlich.android.tipcalculator.utils.ReadableFormatFormatter
+import com.raywenderlich.android.tipcalculator.utils.numberutils.NumberUtils
 
 /**
- * Filters out any input that doesn't comply with the Tip format.
- *
- * Examples of valid inputs:
- * - 10%
- * - 10.00%
+ * Creates readable User friendly value of the tip value.
  */
-class TipFormatInputFilter : InputFilter {
+class TipReadableFormatFormatter(private val numberUtils: NumberUtils) : ReadableFormatFormatter {
 
   companion object {
-    const val CURRENCY_FORMAT_INPUT_FILTER_REGEX = "(0|[1-9][0-9]*)?(\\.[0-9]{0,2})?%?"
-    const val FIRST_CHARACTER_INDEX = 0
+    private const val READABLE_FORMAT = "%.2f%%"
   }
 
-  private val stringBuilder = StringBuilder()
-  private val pattern = Pattern.compile(CURRENCY_FORMAT_INPUT_FILTER_REGEX)
-
-  override fun filter(
-      source: CharSequence,
-      start: Int,
-      end: Int,
-      dest: Spanned,
-      dstart: Int,
-      dend: Int
-  ): CharSequence? {
-
-    stringBuilder.clear()
-    val input = stringBuilder
-        .append(dest.subSequence(FIRST_CHARACTER_INDEX, dstart))
-        .append(source)
-        .append(dest.subSequence(dend, dest.length))
-        .toString()
-
-    val matcher = pattern.matcher(input)
-    return if (!matcher.matches()) dest.subSequence(dstart, dend) else null
-  }
+  /**
+   * Map the number to readable Tip format.
+   *
+   * Examples:
+   * - 10     --> "10.00%"
+   * - 10.123 --> "10.12%"
+   */
+  override fun mapToReadableFormat(value: Float): String =
+      String.format(READABLE_FORMAT, numberUtils.roundUpToTwoDecimalPlaces(value))
 }

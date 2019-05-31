@@ -30,7 +30,7 @@
 package com.raywenderlich.android.tipcalculator
 
 import com.raywenderlich.android.tipcalculator.utils.numberutils.NumberUtilsImpl
-import com.raywenderlich.android.tipcalculator.utils.tip.TipReadableFormatFormatter
+import com.raywenderlich.android.tipcalculator.utils.tiputils.TipReadableFormatFormatter
 import org.junit.Assert
 import org.junit.Test
 

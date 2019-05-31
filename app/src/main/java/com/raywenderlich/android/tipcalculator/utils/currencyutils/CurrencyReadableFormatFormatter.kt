@@ -27,7 +27,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.bill
+package com.raywenderlich.android.tipcalculator.utils.currencyutils
 
 import com.raywenderlich.android.tipcalculator.utils.ReadableFormatFormatter
 import com.raywenderlich.android.tipcalculator.utils.numberutils.NumberUtils

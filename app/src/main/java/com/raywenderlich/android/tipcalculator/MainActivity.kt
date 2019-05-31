@@ -131,12 +131,15 @@ class MainActivity : AppCompatActivity() {
 
   private fun calculateResult() {
     if (inputValuesAreValid()) {
+
+      // Read input values
       val billValue = stringUtils
           .formatToNumericDecimalValue(billEditText.text.toString())
           .toFloat()
       val tipValue = stringUtils.formatToNumericDecimalValue(tipEditText.text.toString()).toFloat()
       val partyCount = partyEditText.text.toString().toInt()
 
+      // Calculate results
       val total = billValue * (1 + tipValue / 100)
       val perPerson = numberUtils.roundUpToTwoDecimalPlaces(total / partyCount)
 

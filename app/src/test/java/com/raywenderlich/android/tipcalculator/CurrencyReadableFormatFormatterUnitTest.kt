@@ -29,7 +29,7 @@
  */
 package com.raywenderlich.android.tipcalculator
 
-import com.raywenderlich.android.tipcalculator.utils.bill.CurrencyReadableFormatFormatter
+import com.raywenderlich.android.tipcalculator.utils.currencyutils.CurrencyReadableFormatFormatter
 import com.raywenderlich.android.tipcalculator.utils.numberutils.NumberUtilsImpl
 import org.junit.Assert
 import org.junit.Test
