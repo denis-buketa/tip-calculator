@@ -84,8 +84,7 @@
       android:hint="@string/hint_input_bill_amount"
       android:inputType="numberDecimal"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:text="60.00$"/>
+      app:layout_constraintTop_toTopOf="parent"/>
 
   <EditText
       android:id="@+id/tipEditText"
@@ -96,8 +95,7 @@
       android:hint="@string/hint_input_tip_amount"
       android:inputType="numberDecimal"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/billEditText"
-      tools:text="20.00%"/>
+      app:layout_constraintTop_toBottomOf="@+id/billEditText"/>
 
   <EditText
       android:id="@+id/partyEditText"
@@ -106,10 +104,9 @@
       android:layout_marginEnd="@dimen/section_horizontal_margin"
       android:layout_marginTop="@dimen/input_field_top_margin"
       android:hint="@string/hint_input_party_amount"
-      android:inputType="numberSigned"
+      android:inputType="number"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/tipEditText"
-      tools:text="4"/>
+      app:layout_constraintTop_toBottomOf="@+id/tipEditText"/>
 
   <!-- Results Sections -->
 
@@ -152,28 +149,40 @@
       android:id="@+id/totalValueTextView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginStart="@dimen/section_horizontal_margin"
-      android:layout_marginTop="@dimen/result_section_top_margin"
-      android:text="-"
+      android:text="@string/empty_result"
       android:textColor="@color/colorBlack"
       app:layout_constraintBottom_toBottomOf="@+id/totalTextView"
-      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/perPersonValueTextView"
       app:layout_constraintTop_toTopOf="@+id/totalTextView"
-      tools:text="72.00$"/>
+      tools:text="$72.00"/>
 
   <TextView
       android:id="@+id/perPersonValueTextView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
       android:layout_marginStart="@dimen/section_horizontal_margin"
-      android:layout_marginTop="@dimen/result_section_top_margin"
-      android:text="-"
+      android:text="@string/empty_result"
       android:textColor="@color/colorBlack"
       app:layout_constraintBottom_toBottomOf="@+id/perPersonTextView"
-      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/perPersonTextView"
       app:layout_constraintTop_toTopOf="@+id/perPersonTextView"
-      tools:text="18.00$"/>
+      tools:text="$18.00"/>
+
+  <!-- Calculate Button -->
+
+  <Button
+      android:id="@+id/calculateButton"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/calculate_button_horizontal_margin"
+      android:layout_marginStart="@dimen/calculate_button_horizontal_margin"
+      android:layout_marginTop="@dimen/calculate_button_top_margin"
+      android:clickable="true"
+      android:focusable="true"
+      android:text="@string/calculate_result"
+      android:textColor="@color/colorWhite"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/perPersonTextView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

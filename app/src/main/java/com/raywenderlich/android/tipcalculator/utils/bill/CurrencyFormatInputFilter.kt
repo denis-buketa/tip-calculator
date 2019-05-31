@@ -27,9 +27,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.billutils
+package com.raywenderlich.android.tipcalculator.utils.bill
 
-interface BillUtils {
+import android.text.InputFilter
+import android.text.Spanned
+import java.util.regex.Pattern
 
-  fun mapToReadableFormat(billValue: Float): String
+/**
+ * Filters out any input that doesn't comply with the Currency format.
+ *
+ * Examples of valid inputs:
+ * - $10
+ * - $10.00
+ */
+class CurrencyFormatInputFilter : InputFilter {
+
+  companion object {
+    const val CURRENCY_FORMAT_INPUT_FILTER_REGEX = "\\$?(0|[1-9][0-9]*)?(\\.[0-9]{0,2})?"
+    const val FIRST_CHARACTER_INDEX = 0
+  }
+
+  private val stringBuilder = StringBuilder()
+  private val pattern = Pattern.compile(CURRENCY_FORMAT_INPUT_FILTER_REGEX)
+
+  override fun filter(
+      source: CharSequence,
+      start: Int,
+      end: Int,
+      dest: Spanned,
+      dstart: Int,
+      dend: Int
+  ): CharSequence? {
+
+    stringBuilder.clear()
+    val input = stringBuilder
+        .append(dest.subSequence(FIRST_CHARACTER_INDEX, dstart))
+        .append(source)
+        .append(dest.subSequence(dend, dest.length))
+        .toString()
+
+    val matcher = pattern.matcher(input)
+
+    return if (!matcher.matches()) dest.subSequence(dstart, dend) else null
+  }
 }
