@@ -9,4 +9,7 @@
   <dimen name="result_top_margin">16dp</dimen>
   <dimen name="result_section_top_margin">8dp</dimen>
 
+  <dimen name="calculate_button_horizontal_margin">8dp</dimen>
+  <dimen name="calculate_button_top_margin">16dp</dimen>
+
 </resources>

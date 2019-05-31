@@ -27,29 +27,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.billutils
+package com.raywenderlich.android.tipcalculator.utils.tiputils
 
-import com.raywenderlich.android.tipcalculator.utils.numberutils.NumberUtils
+import android.text.InputFilter
+import android.text.Spanned
+import java.util.regex.Pattern
 
 /**
- * Creates readable value of the bill for the User.
+ * Filters out any input that doesn't comply with the Tip format.
+ *
+ * Examples of valid inputs:
+ * - 10%
+ * - 10.00%
  */
-class BillUtilsImpl(private val numberUtils: NumberUtils) : BillUtils {
+class TipFormatInputFilter : InputFilter {
 
   companion object {
-    private const val READABLE_FORMAT = "%.2f$"
+    const val CURRENCY_FORMAT_INPUT_FILTER_REGEX = "(0|[1-9][0-9]*)?(\\.[0-9]{0,2})?%?"
+    const val FIRST_CHARACTER_INDEX = 0
   }
 
-  /**
-   * Map the number to readable Tip format.
-   *
-   * Examples:
-   * - 10     --> "10.00$"
-   * - 10.123 --> "10.12$"
-   * - 10.125 --> "10.13$"
-   * - 10.127 --> "10.13$"
-   */
-  override fun mapToReadableFormat(billValue: Float): String =
-      String.format(READABLE_FORMAT, numberUtils.roundUpToTwoDecimalPlaces(billValue))
+  private val stringBuilder = StringBuilder()
+  private val pattern = Pattern.compile(CURRENCY_FORMAT_INPUT_FILTER_REGEX)
 
+  override fun filter(
+      source: CharSequence,
+      start: Int,
+      end: Int,
+      dest: Spanned,
+      dstart: Int,
+      dend: Int
+  ): CharSequence? {
+
+    stringBuilder.clear()
+    val input = stringBuilder
+        .append(dest.subSequence(FIRST_CHARACTER_INDEX, dstart))
+        .append(source)
+        .append(dest.subSequence(dend, dest.length))
+        .toString()
+
+    val matcher = pattern.matcher(input)
+    return if (!matcher.matches()) dest.subSequence(dstart, dend) else null
+  }
 }

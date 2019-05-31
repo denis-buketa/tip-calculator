@@ -27,9 +27,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.billutils
+package com.raywenderlich.android.tipcalculator.utils
 
-interface BillUtils {
+/**
+ * Formats the value to a User friendly value.
+ */
+interface ReadableFormatFormatter {
 
-  fun mapToReadableFormat(billValue: Float): String
+  fun mapToReadableFormat(value: Float): String
 }
