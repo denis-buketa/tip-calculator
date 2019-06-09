@@ -43,7 +43,7 @@ import java.util.regex.Pattern
 class CurrencyFormatInputFilter : InputFilter {
 
   companion object {
-    const val CURRENCY_FORMAT_INPUT_FILTER_REGEX = "\\$?(0|[1-9][0-9]*)?(\\.[0-9]{0,2})?"
+    const val CURRENCY_FORMAT_INPUT_FILTER_REGEX = "\\$?(0|[1-9][0-9]{0,4})?(\\.[0-9]{0,2})?"
     const val FIRST_CHARACTER_INDEX = 0
   }
 

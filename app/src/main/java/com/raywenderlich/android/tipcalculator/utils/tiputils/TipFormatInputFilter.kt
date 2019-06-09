@@ -43,7 +43,7 @@ import java.util.regex.Pattern
 class TipFormatInputFilter : InputFilter {
 
   companion object {
-    const val CURRENCY_FORMAT_INPUT_FILTER_REGEX = "(0|[1-9][0-9]*)?(\\.[0-9]{0,2})?%?"
+    const val CURRENCY_FORMAT_INPUT_FILTER_REGEX = "(0|[1-9][0-9]?)?(\\.[0-9]{0,2})?%?"
     const val FIRST_CHARACTER_INDEX = 0
   }
 
@@ -67,6 +67,7 @@ class TipFormatInputFilter : InputFilter {
         .toString()
 
     val matcher = pattern.matcher(input)
+
     return if (!matcher.matches()) dest.subSequence(dstart, dend) else null
   }
 }
