@@ -30,7 +30,7 @@
 package com.raywenderlich.android.tipcalculator.utils
 
 /**
- * Performs specific formatting and calculations on numbers.
+ * Utils for doing various operations on numbers.
  */
 class NumberUtils {
 

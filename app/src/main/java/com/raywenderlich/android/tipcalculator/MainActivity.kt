@@ -49,11 +49,15 @@ class MainActivity : AppCompatActivity() {
 
   companion object {
     const val EMPTY_RESULT = "-"
+
     const val DEFAULT_TIP_PERCENT = 20.00f
     const val DEFAULT_PARTY_COUNT = 4
 
-    const val BILL_INPUT_FILTER_REGEX = "\\$?(0|[1-9][0-9]{0,4})?(\\.[0-9]{0,2})?"
+    // [$0.00 - $9999.99]
+    const val BILL_INPUT_FILTER_REGEX = "\\$?(0|[1-9][0-9]{0,3})?(\\.[0-9]{0,2})?"
+    // [0.00% - 99.99%]
     const val TIP_INPUT_FILTER_REGEX = "(0|[1-9][0-9]?)?(\\.[0-9]{0,2})?%?"
+    // [1 - 100]
     const val PARTY_COUNT_FILTER_REGEX = "([1-9]|[1-8][0-9]|9[0-9]|100)?"
 
     const val BILL_FORMAT = "$%.2f"
@@ -113,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         val inputValue = inputEditText.text.toString()
 
         if (hasFocus.not()) {
-          // If Input Field lost focus, format the value
+          // If Input Field loses the focus, format the value
 
           // Set User friendly value
           val value = stringUtils.formatToNumericDecimalValue(inputValue).toFloat()
@@ -121,7 +125,7 @@ class MainActivity : AppCompatActivity() {
           inputEditText.setText(readableValue)
 
         } else if (hasFocus) {
-          // If Input Field regained focus, remove any unnecessary characters
+          // If Input Field regains focus, remove any unnecessary characters
 
           // Remove every character but numeric ones ([0-9]) and the decimal dot (.)
           inputEditText.setText(stringUtils.formatToNumericDecimalValue(inputValue))
@@ -155,15 +159,15 @@ class MainActivity : AppCompatActivity() {
         .formatToNumericDecimalValue(billEditText.text.toString())
         .toFloat()
       val tipValue = stringUtils.formatToNumericDecimalValue(tipEditText.text.toString()).toFloat()
-      val partyCount = partyEditText.text.toString().toInt()
+      val partyCountValue = partyEditText.text.toString().toInt()
 
       // Calculate results
-      val total = billValue * (1 + tipValue / 100)
-      val perPerson = numberUtils.roundUpToTwoDecimalPlaces(total / partyCount)
+      val totalValue = billValue * (1 + tipValue / 100)
+      val perPersonValue = numberUtils.roundUpToTwoDecimalPlaces(totalValue / partyCountValue)
 
       // Show result to the User
-      totalValueTextView.text = String.format(BILL_FORMAT, total)
-      perPersonValueTextView.text = String.format(BILL_FORMAT, perPerson)
+      totalValueTextView.text = String.format(BILL_FORMAT, totalValue)
+      perPersonValueTextView.text = String.format(BILL_FORMAT, perPersonValue)
     } else {
 
       // Show empty result
@@ -176,5 +180,4 @@ class MainActivity : AppCompatActivity() {
       tipEditText.text.isNotEmpty() &&
       partyEditText.text.isNotEmpty() &&
       partyEditText.text.toString().toInt() > 0
-
 }

@@ -30,7 +30,7 @@
 package com.raywenderlich.android.tipcalculator.utils
 
 /**
- * Used for various operations on Strings.
+ * Utils for doing various operations on strings.
  */
 class StringUtils {
 

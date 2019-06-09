@@ -33,6 +33,9 @@ import android.text.InputFilter
 import android.text.Spanned
 import java.util.regex.Pattern
 
+/**
+ * Filter that uses regex for filtering the input values.
+ */
 class UserInputFilter(regex: String) : InputFilter {
 
   companion object {
@@ -42,7 +45,6 @@ class UserInputFilter(regex: String) : InputFilter {
   private val stringBuilder = StringBuilder()
   private val pattern = Pattern.compile(regex)
 
-  // Filter the input value using the regex
   override fun filter(
     source: CharSequence,
     start: Int,
