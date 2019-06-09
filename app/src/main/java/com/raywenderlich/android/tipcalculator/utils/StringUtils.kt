@@ -27,9 +27,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.stringutils
+package com.raywenderlich.android.tipcalculator.utils
 
-interface StringUtils {
+/**
+ * Used for various operations on Strings.
+ */
+class StringUtils {
 
-  fun formatToNumericDecimalValue(value: String): String
+  companion object {
+    const val ONLY_NUMERIC_DECIMAL_NUMBERS_REGEX_PATTERN = "[^0-9.]+"
+    const val EMPTY_STRING = ""
+  }
+
+  private val regex = Regex(ONLY_NUMERIC_DECIMAL_NUMBERS_REGEX_PATTERN)
+
+  /**
+   * Remove every character but numeric ones ([0-9]) and the decimal dot (.).
+   */
+  fun formatToNumericDecimalValue(value: String): String = regex.replace(value, EMPTY_STRING)
 }

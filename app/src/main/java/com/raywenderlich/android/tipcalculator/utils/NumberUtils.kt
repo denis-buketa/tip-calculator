@@ -30,9 +30,22 @@
 package com.raywenderlich.android.tipcalculator.utils
 
 /**
- * Formats the value to a User friendly value.
+ * Performs specific formatting and calculations on numbers.
  */
-interface ReadableFormatFormatter {
+class NumberUtils {
 
-  fun mapToReadableFormat(value: Float): String
+  companion object {
+    private const val ROUND_UP_VALUE = 100.0f
+  }
+
+  /**
+   * Round up the number to 2 decimal places.
+   *
+   * Examples:
+   * - 10.123 --> 10.12
+   * - 10.125 --> 10.13
+   * - 10.127 --> 10.13
+   */
+  fun roundUpToTwoDecimalPlaces(value: Float): Float =
+    Math.round(value * ROUND_UP_VALUE) / ROUND_UP_VALUE
 }

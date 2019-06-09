@@ -27,44 +27,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.tiputils
+package com.raywenderlich.android.tipcalculator.utils
 
 import android.text.InputFilter
 import android.text.Spanned
 import java.util.regex.Pattern
 
-/**
- * Filters out any input that doesn't comply with the Tip format.
- *
- * Examples of valid inputs:
- * - 10%
- * - 10.00%
- */
-class TipFormatInputFilter : InputFilter {
+class UserInputFilter(regex: String) : InputFilter {
 
   companion object {
-    const val CURRENCY_FORMAT_INPUT_FILTER_REGEX = "(0|[1-9][0-9]?)?(\\.[0-9]{0,2})?%?"
     const val FIRST_CHARACTER_INDEX = 0
   }
 
   private val stringBuilder = StringBuilder()
-  private val pattern = Pattern.compile(CURRENCY_FORMAT_INPUT_FILTER_REGEX)
+  private val pattern = Pattern.compile(regex)
 
+  // Filter the input value using the regex
   override fun filter(
-      source: CharSequence,
-      start: Int,
-      end: Int,
-      dest: Spanned,
-      dstart: Int,
-      dend: Int
+    source: CharSequence,
+    start: Int,
+    end: Int,
+    dest: Spanned,
+    dstart: Int,
+    dend: Int
   ): CharSequence? {
 
     stringBuilder.clear()
     val input = stringBuilder
-        .append(dest.subSequence(FIRST_CHARACTER_INDEX, dstart))
-        .append(source)
-        .append(dest.subSequence(dend, dest.length))
-        .toString()
+      .append(dest.subSequence(FIRST_CHARACTER_INDEX, dstart))
+      .append(source)
+      .append(dest.subSequence(dend, dest.length))
+      .toString()
 
     val matcher = pattern.matcher(input)
 

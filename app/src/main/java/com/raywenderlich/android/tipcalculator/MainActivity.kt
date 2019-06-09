@@ -37,7 +37,9 @@ import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.raywenderlich.android.tipcalculator.utils.ReadableFormatFormatter
+import com.raywenderlich.android.tipcalculator.utils.NumberUtils
+import com.raywenderlich.android.tipcalculator.utils.StringUtils
+import com.raywenderlich.android.tipcalculator.utils.UserInputFilter
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -49,14 +51,17 @@ class MainActivity : AppCompatActivity() {
     const val EMPTY_RESULT = "-"
     const val DEFAULT_TIP_PERCENT = 20.00f
     const val DEFAULT_PARTY_COUNT = 4
+
+    const val BILL_INPUT_FILTER_REGEX = "\\$?(0|[1-9][0-9]{0,4})?(\\.[0-9]{0,2})?"
+    const val TIP_INPUT_FILTER_REGEX = "(0|[1-9][0-9]?)?(\\.[0-9]{0,2})?%?"
+    const val PARTY_COUNT_FILTER_REGEX = "([1-9]|[1-8][0-9]|9[0-9]|100)?"
+
+    const val BILL_FORMAT = "$%.2f"
+    const val TIP_FORMAT = "%.2f%%"
   }
 
-  private val billReadableFormatFormatter = DependencyInjector.instance.billReadableFormatFormatter
-  private val tipReadableFormatFormatter = DependencyInjector.instance.tipReadableFormatFormatter
-  private val billFormatInputFilter = DependencyInjector.instance.currencyFormatInputFilter
-  private val tipFormatInputFilter = DependencyInjector.instance.tipFormatInputFilter
-  private val stringUtils = DependencyInjector.instance.stringUtils
-  private val numberUtils = DependencyInjector.instance.numberUtils
+  private val stringUtils = StringUtils()
+  private val numberUtils = NumberUtils()
 
   private val calculateButtonColor by lazy { ContextCompat.getColor(this, R.color.colorPrimary) }
 
@@ -82,34 +87,41 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun initInputFields() {
-    initInputField(billEditText, billFormatInputFilter, billReadableFormatFormatter)
-    initInputField(tipEditText, tipFormatInputFilter, tipReadableFormatFormatter)
+
+    // Initialize Bill Input field
+    initInputField(billEditText, BILL_INPUT_FILTER_REGEX, BILL_FORMAT)
+
+    // Initialize Tip Input field
+    initInputField(tipEditText, TIP_INPUT_FILTER_REGEX, TIP_FORMAT)
+
+    // Initialize Party Count Input field
+    partyEditText.filters = arrayOf(UserInputFilter(PARTY_COUNT_FILTER_REGEX))
   }
 
   /**
-   * Initializes the input field with its [InputFilter] and [ReadableFormatFormatter].
+   * Initializes the input field with its [InputFilter] and value format.
    */
-  private fun initInputField(
-      inputEditText: EditText,
-      inputFilter: InputFilter,
-      readableFormatFormatter: ReadableFormatFormatter
-  ) {
+  private fun initInputField(inputEditText: EditText, filter: String, format: String) {
 
     // Set inputFilter
-    inputEditText.filters = arrayOf(inputFilter)
+    inputEditText.filters = arrayOf(UserInputFilter(filter))
 
     // Set specific actions depending on the input field's focus
     inputEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
       if (inputEditText.text.isNotEmpty()) {
+
         val inputValue = inputEditText.text.toString()
+
         if (hasFocus.not()) {
+          // If Input Field lost focus, format the value
 
           // Set User friendly value
           val value = stringUtils.formatToNumericDecimalValue(inputValue).toFloat()
-          val readableValue = readableFormatFormatter.mapToReadableFormat(value)
+          val readableValue = String.format(format, numberUtils.roundUpToTwoDecimalPlaces(value))
           inputEditText.setText(readableValue)
 
         } else if (hasFocus) {
+          // If Input Field regained focus, remove any unnecessary characters
 
           // Remove every character but numeric ones ([0-9]) and the decimal dot (.)
           inputEditText.setText(stringUtils.formatToNumericDecimalValue(inputValue))
@@ -119,7 +131,13 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun initDefaultValues() {
-    tipEditText.setText(tipReadableFormatFormatter.mapToReadableFormat(DEFAULT_TIP_PERCENT))
+
+    // Set Default Tip value
+    val defaultTipValue = numberUtils.roundUpToTwoDecimalPlaces(DEFAULT_TIP_PERCENT)
+    val defaultTip = String.format(TIP_FORMAT, defaultTipValue)
+    tipEditText.setText(defaultTip)
+
+    // Set Default Party Count value
     partyEditText.setText(DEFAULT_PARTY_COUNT.toString())
   }
 
@@ -134,8 +152,8 @@ class MainActivity : AppCompatActivity() {
 
       // Read input values
       val billValue = stringUtils
-          .formatToNumericDecimalValue(billEditText.text.toString())
-          .toFloat()
+        .formatToNumericDecimalValue(billEditText.text.toString())
+        .toFloat()
       val tipValue = stringUtils.formatToNumericDecimalValue(tipEditText.text.toString()).toFloat()
       val partyCount = partyEditText.text.toString().toInt()
 
@@ -144,8 +162,8 @@ class MainActivity : AppCompatActivity() {
       val perPerson = numberUtils.roundUpToTwoDecimalPlaces(total / partyCount)
 
       // Show result to the User
-      totalValueTextView.text = billReadableFormatFormatter.mapToReadableFormat(total)
-      perPersonValueTextView.text = billReadableFormatFormatter.mapToReadableFormat(perPerson)
+      totalValueTextView.text = String.format(BILL_FORMAT, total)
+      perPersonValueTextView.text = String.format(BILL_FORMAT, perPerson)
     } else {
 
       // Show empty result
