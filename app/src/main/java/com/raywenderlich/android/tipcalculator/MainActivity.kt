@@ -39,7 +39,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.raywenderlich.android.tipcalculator.utils.NumberUtils
 import com.raywenderlich.android.tipcalculator.utils.StringUtils
-import com.raywenderlich.android.tipcalculator.utils.UserInputFilter
+import com.raywenderlich.android.tipcalculator.filter.UserInputFilter
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -99,7 +99,11 @@ class MainActivity : AppCompatActivity() {
     initInputField(tipEditText, TIP_INPUT_FILTER_REGEX, TIP_FORMAT)
 
     // Initialize Party Count Input field
-    partyEditText.filters = arrayOf(UserInputFilter(PARTY_COUNT_FILTER_REGEX))
+    partyEditText.filters = arrayOf(
+      UserInputFilter(
+        PARTY_COUNT_FILTER_REGEX
+      )
+    )
   }
 
   /**
@@ -108,7 +112,11 @@ class MainActivity : AppCompatActivity() {
   private fun initInputField(inputEditText: EditText, filter: String, format: String) {
 
     // Set inputFilter
-    inputEditText.filters = arrayOf(UserInputFilter(filter))
+    inputEditText.filters = arrayOf(
+      UserInputFilter(
+        filter
+      )
+    )
 
     // Set specific actions depending on the input field's focus
     inputEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
