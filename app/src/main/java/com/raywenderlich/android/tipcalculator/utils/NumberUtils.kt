@@ -46,6 +46,6 @@ class NumberUtils {
    * - 10.125 --> 10.13
    * - 10.127 --> 10.13
    */
-  fun roundUpToTwoDecimalPlaces(value: Float): Float =
-    Math.round(value * ROUND_UP_VALUE) / ROUND_UP_VALUE
+  fun roundUpToTwoDecimalPlaces(value: Float): Float = Math.round(
+      value * ROUND_UP_VALUE) / ROUND_UP_VALUE
 }

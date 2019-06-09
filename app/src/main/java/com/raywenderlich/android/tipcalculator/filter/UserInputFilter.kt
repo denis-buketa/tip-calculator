@@ -46,20 +46,20 @@ class UserInputFilter(regex: String) : InputFilter {
   private val pattern = Pattern.compile(regex)
 
   override fun filter(
-    source: CharSequence,
-    start: Int,
-    end: Int,
-    dest: Spanned,
-    dstart: Int,
-    dend: Int
+      source: CharSequence,
+      start: Int,
+      end: Int,
+      dest: Spanned,
+      dstart: Int,
+      dend: Int
   ): CharSequence? {
 
     stringBuilder.clear()
     val input = stringBuilder
-      .append(dest.subSequence(FIRST_CHARACTER_INDEX, dstart))
-      .append(source)
-      .append(dest.subSequence(dend, dest.length))
-      .toString()
+        .append(dest.subSequence(FIRST_CHARACTER_INDEX, dstart))
+        .append(source)
+        .append(dest.subSequence(dend, dest.length))
+        .toString()
 
     val matcher = pattern.matcher(input)
 
