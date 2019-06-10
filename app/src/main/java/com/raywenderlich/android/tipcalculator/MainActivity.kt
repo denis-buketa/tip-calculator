@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     val defaultTip = String.format(TIP_FORMAT, defaultTipValue)
     tipEditText.setText(defaultTip)
 
-    // Set default party Count value
+    // Set default party count value
     partyEditText.setText(DEFAULT_PARTY_COUNT.toString())
 
     // Set calculate button's onClick listener
@@ -108,31 +108,29 @@ class MainActivity : AppCompatActivity() {
   private fun initInputField(inputEditText: EditText, filter: String, format: String) {
 
     // Set inputFilter
-    inputEditText.filters = arrayOf(
-        UserInputFilter(
-            filter
-        )
-    )
+    inputEditText.filters = arrayOf(UserInputFilter(filter))
 
     // Set specific actions depending on the input field's focus
     inputEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+
       if (inputEditText.text.isNotEmpty()) {
 
-        val inputValue = inputEditText.text.toString()
+        // Remove any non-numeric values ([0-9]) and the decimal dot (.)
+        val inputAmount = stringUtils.formatToNumericDecimalValue(inputEditText.text.toString())
 
         if (hasFocus.not()) {
-          // If Input Field loses the focus, format the value
 
-          // Set User friendly value
-          val value = stringUtils.formatToNumericDecimalValue(inputValue).toFloat()
-          val readableValue = String.format(format, numberUtils.roundUpToTwoDecimalPlaces(value))
+          // Format the input amount to user-friendly value when the input field loses its focus
+          val readableValue = String.format(
+              format,
+              numberUtils.roundUpToTwoDecimalPlaces(inputAmount.toFloat())
+          )
           inputEditText.setText(readableValue)
 
         } else if (hasFocus) {
-          // If Input Field regains focus, remove any unnecessary characters
 
-          // Remove every character but numeric ones ([0-9]) and the decimal dot (.)
-          inputEditText.setText(stringUtils.formatToNumericDecimalValue(inputValue))
+          // Set numeric value when the input field regains its focus
+          inputEditText.setText(inputAmount)
         }
       }
     }

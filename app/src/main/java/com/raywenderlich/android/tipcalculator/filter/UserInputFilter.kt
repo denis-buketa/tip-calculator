@@ -54,15 +54,21 @@ class UserInputFilter(regex: String) : InputFilter {
       dend: Int
   ): CharSequence? {
 
+    // Clear string builder
     stringBuilder.clear()
+
+    // Add the new character to current input
     val input = stringBuilder
         .append(dest.subSequence(FIRST_CHARACTER_INDEX, dstart))
         .append(source)
         .append(dest.subSequence(dend, dest.length))
         .toString()
 
+    // Create a matcher for the new input
     val matcher = pattern.matcher(input)
 
+    // If new input complies with the regex pattern, add new character and return the new input
+    // If new input doesn't comply with the regex pattern, ignore new character
     return if (!matcher.matches()) dest.subSequence(dstart, dend) else null
   }
 }
