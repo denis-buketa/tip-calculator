@@ -30,13 +30,11 @@
 
 package com.raywenderlich.android.tipcalculator
 
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.raywenderlich.android.tipcalculator.filter.UserInputFilter
 import com.raywenderlich.android.tipcalculator.utils.NumberUtils
 import com.raywenderlich.android.tipcalculator.utils.StringUtils
@@ -67,43 +65,41 @@ class MainActivity : AppCompatActivity() {
   private val stringUtils = StringUtils()
   private val numberUtils = NumberUtils()
 
-  private val calculateButtonColor by lazy { ContextCompat.getColor(this, R.color.colorPrimary) }
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    initCalculateButton()
-    initInputFields()
-    initDefaultValues()
-  }
-
-  private fun initCalculateButton() {
-
-    // Set Button's color
-    calculateButton.background.setColorFilter(calculateButtonColor, PorterDuff.Mode.MULTIPLY)
-
-    // Set Button's OnClick listener
-    calculateButton.setOnClickListener {
-      clearInputFieldsFocus()
-      calculateResult()
-    }
-  }
-
-  private fun initInputFields() {
-
-    // Initialize Bill Input field
+    // Initialize bill input field
     initInputField(billEditText, BILL_INPUT_FILTER_REGEX, BILL_FORMAT)
 
-    // Initialize Tip Input field
+    // Initialize tip input field
     initInputField(tipEditText, TIP_INPUT_FILTER_REGEX, TIP_FORMAT)
 
-    // Initialize Party Count Input field
+    // Initialize party count input field
     partyEditText.filters = arrayOf(
         UserInputFilter(
             PARTY_COUNT_FILTER_REGEX
         )
     )
+
+    // Set default tip value
+    val defaultTipValue = numberUtils.roundUpToTwoDecimalPlaces(DEFAULT_TIP_PERCENT)
+    val defaultTip = String.format(TIP_FORMAT, defaultTipValue)
+    tipEditText.setText(defaultTip)
+
+    // Set default party Count value
+    partyEditText.setText(DEFAULT_PARTY_COUNT.toString())
+
+    // Set calculate button's onClick listener
+    calculateButton.setOnClickListener {
+
+      // Clear input fields' focuses
+      billEditText.clearFocus()
+      tipEditText.clearFocus()
+      partyEditText.clearFocus()
+
+      calculateResult()
+    }
   }
 
   /**
@@ -140,23 +136,6 @@ class MainActivity : AppCompatActivity() {
         }
       }
     }
-  }
-
-  private fun initDefaultValues() {
-
-    // Set Default Tip value
-    val defaultTipValue = numberUtils.roundUpToTwoDecimalPlaces(DEFAULT_TIP_PERCENT)
-    val defaultTip = String.format(TIP_FORMAT, defaultTipValue)
-    tipEditText.setText(defaultTip)
-
-    // Set Default Party Count value
-    partyEditText.setText(DEFAULT_PARTY_COUNT.toString())
-  }
-
-  private fun clearInputFieldsFocus() {
-    billEditText.clearFocus()
-    tipEditText.clearFocus()
-    partyEditText.clearFocus()
   }
 
   private fun calculateResult() {

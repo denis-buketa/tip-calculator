@@ -150,6 +150,7 @@
       android:layout_marginEnd="@dimen/calculate_button_horizontal_margin"
       android:layout_marginStart="@dimen/calculate_button_horizontal_margin"
       android:layout_marginTop="@dimen/calculate_button_top_margin"
+      android:background="@drawable/btn_calculate_result"
       android:clickable="true"
       android:focusable="true"
       android:text="@string/calculate_result"
