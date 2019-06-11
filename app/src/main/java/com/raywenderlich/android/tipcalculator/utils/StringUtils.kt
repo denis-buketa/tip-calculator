@@ -30,9 +30,19 @@
 package com.raywenderlich.android.tipcalculator.utils
 
 /**
- * Formats the value to a User friendly value.
+ * Utils for doing various operations on strings.
  */
-interface ReadableFormatFormatter {
+class StringUtils {
 
-  fun mapToReadableFormat(value: Float): String
+  companion object {
+    const val ONLY_NUMERIC_DECIMAL_NUMBERS_REGEX_PATTERN = "[^0-9.]+"
+    const val EMPTY_STRING = ""
+  }
+
+  private val regex = Regex(ONLY_NUMERIC_DECIMAL_NUMBERS_REGEX_PATTERN)
+
+  /**
+   * Remove every character but numeric ones ([0-9]) and the decimal dot (.).
+   */
+  fun formatToNumericDecimalValue(value: String): String = regex.replace(value, EMPTY_STRING)
 }

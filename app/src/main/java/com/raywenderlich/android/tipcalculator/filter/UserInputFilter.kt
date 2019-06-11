@@ -27,28 +27,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.android.tipcalculator.utils.tiputils
+package com.raywenderlich.android.tipcalculator.filter
 
 import android.text.InputFilter
 import android.text.Spanned
 import java.util.regex.Pattern
 
 /**
- * Filters out any input that doesn't comply with the Tip format.
- *
- * Examples of valid inputs:
- * - 10%
- * - 10.00%
+ * Filter that uses regex for filtering the input values.
  */
-class TipFormatInputFilter : InputFilter {
+class UserInputFilter(regex: String) : InputFilter {
 
   companion object {
-    const val CURRENCY_FORMAT_INPUT_FILTER_REGEX = "(0|[1-9][0-9]?)?(\\.[0-9]{0,2})?%?"
     const val FIRST_CHARACTER_INDEX = 0
   }
 
   private val stringBuilder = StringBuilder()
-  private val pattern = Pattern.compile(CURRENCY_FORMAT_INPUT_FILTER_REGEX)
+  private val pattern = Pattern.compile(regex)
 
   override fun filter(
       source: CharSequence,
@@ -59,15 +54,21 @@ class TipFormatInputFilter : InputFilter {
       dend: Int
   ): CharSequence? {
 
+    // Clear string builder
     stringBuilder.clear()
+
+    // Add the new character to current input
     val input = stringBuilder
         .append(dest.subSequence(FIRST_CHARACTER_INDEX, dstart))
         .append(source)
         .append(dest.subSequence(dend, dest.length))
         .toString()
 
+    // Create a matcher for the new input
     val matcher = pattern.matcher(input)
 
+    // If new input complies with the regex pattern, add new character and return the new input
+    // If new input doesn't comply with the regex pattern, ignore new character
     return if (!matcher.matches()) dest.subSequence(dstart, dend) else null
   }
 }

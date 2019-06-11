@@ -8,4 +8,19 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
+  <style name="SectionStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginEnd">@dimen/section_horizontal_margin</item>
+    <item name="android:layout_marginStart">@dimen/section_horizontal_margin</item>
+  </style>
+
+  <style name="InputStyle">
+    <item name="android:layout_width">@dimen/input_field_width</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginEnd">@dimen/section_horizontal_margin</item>
+    <item name="android:layout_marginTop">@dimen/input_field_top_margin</item>
+    <item name="android:inputType">numberDecimal</item>
+  </style>
+
 </resources>

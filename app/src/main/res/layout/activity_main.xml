@@ -38,14 +38,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-  <!-- Section TextViews -->
+  <!-- Sections -->
 
   <TextView
       android:id="@+id/billTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginStart="@dimen/section_horizontal_margin"
+      style="@style/SectionStyle"
       android:text="@string/section_bill_amount"
       app:layout_constraintBottom_toBottomOf="@+id/billEditText"
       app:layout_constraintStart_toStartOf="parent"
@@ -53,10 +50,7 @@
 
   <TextView
       android:id="@+id/tipTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginStart="@dimen/section_horizontal_margin"
+      style="@style/SectionStyle"
       android:text="@string/section_tip_percent"
       app:layout_constraintBottom_toBottomOf="@+id/tipEditText"
       app:layout_constraintStart_toStartOf="parent"
@@ -64,58 +58,41 @@
 
   <TextView
       android:id="@+id/partyTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginStart="@dimen/section_horizontal_margin"
+      style="@style/SectionStyle"
       android:text="@string/section_people_party"
       app:layout_constraintBottom_toBottomOf="@+id/partyEditText"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@+id/partyEditText"/>
 
-  <!-- User Input EditTexts -->
+  <!-- Input Fields -->
 
   <EditText
       android:id="@+id/billEditText"
-      android:layout_width="@dimen/input_field_width"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginTop="@dimen/input_field_top_margin"
+      style="@style/InputStyle"
       android:hint="@string/hint_input_bill_amount"
-      android:inputType="numberDecimal"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>
 
   <EditText
       android:id="@+id/tipEditText"
-      android:layout_width="@dimen/input_field_width"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginTop="@dimen/input_field_top_margin"
+      style="@style/InputStyle"
       android:hint="@string/hint_input_tip_amount"
-      android:inputType="numberDecimal"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/billEditText"/>
 
   <EditText
       android:id="@+id/partyEditText"
-      android:layout_width="@dimen/input_field_width"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginTop="@dimen/input_field_top_margin"
+      style="@style/InputStyle"
       android:hint="@string/hint_input_party_amount"
       android:inputType="number"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/tipEditText"/>
 
-  <!-- Results Sections -->
+  <!-- Result Sections -->
 
   <TextView
       android:id="@+id/resultsTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginStart="@dimen/section_horizontal_margin"
+      style="@style/SectionStyle"
       android:layout_marginTop="@dimen/result_top_margin"
       android:text="@string/result_label"
       app:layout_constraintStart_toStartOf="parent"
@@ -123,10 +100,7 @@
 
   <TextView
       android:id="@+id/totalTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginStart="@dimen/section_horizontal_margin"
+      style="@style/SectionStyle"
       android:layout_marginTop="@dimen/result_section_top_margin"
       android:text="@string/result_section_total"
       app:layout_constraintStart_toStartOf="parent"
@@ -134,16 +108,13 @@
 
   <TextView
       android:id="@+id/perPersonTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/section_horizontal_margin"
-      android:layout_marginStart="@dimen/section_horizontal_margin"
+      style="@style/SectionStyle"
       android:layout_marginTop="@dimen/result_section_top_margin"
       android:text="@string/result_section_per_person"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/totalTextView"/>
 
-  <!-- Results Values -->
+  <!-- Result Values -->
 
   <TextView
       android:id="@+id/totalValueTextView"
@@ -179,6 +150,7 @@
       android:layout_marginEnd="@dimen/calculate_button_horizontal_margin"
       android:layout_marginStart="@dimen/calculate_button_horizontal_margin"
       android:layout_marginTop="@dimen/calculate_button_top_margin"
+      android:background="@drawable/btn_calculate_result"
       android:clickable="true"
       android:focusable="true"
       android:text="@string/calculate_result"
